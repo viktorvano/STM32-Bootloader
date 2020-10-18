@@ -46,8 +46,8 @@ typedef void (application_t)(void);
 
 typedef struct
 {
-    uint32_t		stack_addr;     // intvec[0] is initial Stack Pointer
-    application_t*	func_p;        // intvec[1] is initial Program Counter
+    uint32_t		stack_addr;     // Stack Pointer
+    application_t*	func_p;        // Program Counter
 } JumpStruct;
 
 AppSelection App;
