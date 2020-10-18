@@ -33,6 +33,23 @@ To find out what is your's MCU Page Size, read a Reference Manual: https://www.s
 A bootloader is just an app that can jump to another application, erase the flash, or write a new data to the FLASH memory.  
 Applications are located in different sections of the FLASH memory, after the last bootloader sector ends.  
 Therefore applications need to have shifted the FLASH memory origin and offset in the vector table.  
+
+This bootloader listens to these commands via USB COM Port:  
+```C
+#define ERASE_FLASH_MEMORY "#$ERASE_MEM"
+#define FLASHING_START "#$FLASH_START"
+#define FLASHING_FINISH "#$FLASH_FINISH"
+#define FLASHING_ABORT "#$FLASH_ABORT"
+```  
+  
+  
+First use the "#$FLASH_START" command, to unlock the FLASH memory. This command also erases the FLASH memory if it was not erased.  
+  
+Second when it receives 4 Bytes, which is a word, it will save it to the FLASH memory. So send your bin file 4 Bytes at once and wait for the answer "Flash: OK\n".  
+  
+When you upload the whole "xyz.bin" file then you can send the "#$FLASH_FINISH" that will lock the FLASH memory.  
+  
+Extra commands are "#$ERASE_MEM" that erases the FLASH memory and "#$FLASH_ABORT" that aborts the FLASH process, erases the FLASH memory and locks it.  
   
 ###### Linker - FLASH.ld
 Keep the flash origin, but change the size of the flash memory according to the bootloader size.  
