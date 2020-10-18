@@ -84,6 +84,26 @@ void deinitEverything()
 ![alt text](https://github.com/viktorvano/STM32-Bootloader/blob/master/images/Deinit_direction.png?raw=true)  
   
 ## Applications
-###### Linker - FLASH.ld
+###### Linker - FLASH.ld  
+App1 (Application 1) - FLASH.ld  
+```C
+/* Memories definition */
+MEMORY
+{
+  RAM    (xrw)    : ORIGIN = 0x20000000,   LENGTH = 20K
+  FLASH    (rx)    : ORIGIN = 0x8005000,   LENGTH = 22K /*64K*/
+}
+```  
+  
+App2 (Application 2) - FLASH.ld  
+```C
+/* Memories definition */
+MEMORY
+{
+  RAM    (xrw)    : ORIGIN = 0x20000000,   LENGTH = 20K
+  FLASH    (rx)    : ORIGIN = 0x800A800,   LENGTH = 22K /*64K*/
+}
+```  
+  
 ###### C Code - Applications
   
