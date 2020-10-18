@@ -21,6 +21,11 @@ The second partition is for the Application1 (22KB).
 The third partion is for the Application2 (22KB).  
   
 ## Bootloader
+  
+A bootloader is just an app that can jump to another application, erase the flash, or write a new data to the FLASH memory.  
+Applications are located in different sections of the FLASH memory, after the last bootloader sector ends.  
+Therefore applications need to have shifted the FLASH memory origin and offset in the vector table.  
+  
 ###### Linker - FLASH.ld
 Keep the flash origin, but change the size of the flash memory according to the bootloader size.  
 This bootloader has size under 20KB. Applocations can start right from the next sector.  
