@@ -18,7 +18,8 @@ This bootloader example can jump to 2 different applications.
 The FLASH memory (64KB) is splitted into multiple partitions.  
 The first partition (20KB) is for the bootloader.  
 The second partition is for the Application1 (22KB).
-The third partion is for the Application2 (22KB).  
+The third partion is for the Application2 (22KB). 
+![alt text](https://github.com/viktorvano/STM32-Bootloader/blob/master/images/FLASH.png?raw=true)  
   
 To calculate offest in KB in binary, visit: https://www.gbmb.org/kb-to-bytes  
 Example:  
@@ -33,7 +34,8 @@ To find out what is your's MCU Page Size, read a Reference Manual: https://www.s
 A bootloader is just an app that can jump to another application, erase the flash, or write a new data to the FLASH memory.  
 Applications are located in different sections of the FLASH memory, after the last bootloader sector ends.  
 Therefore applications need to have shifted the FLASH memory origin and offset in the vector table.  
-
+  
+  
 This bootloader listens to these commands via USB COM Port:  
 ```C
 #define ERASE_FLASH_MEMORY "#$ERASE_MEM"
