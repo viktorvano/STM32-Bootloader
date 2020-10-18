@@ -79,7 +79,9 @@ void deinitEverything()
 	SysTick->LOAD = 0;
 	SysTick->VAL = 0;
 }
-```
+```  
+  
+![alt text](https://github.com/viktorvano/STM32-Bootloader/blob/master/images/Deinit_direction.png?raw=true)  
   
 ## Applications
 ###### Linker - FLASH.ld
