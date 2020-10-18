@@ -89,6 +89,7 @@ void deinitEverything()
 }
 ```  
   
+In order to safely deinitialize a MCU it is good to check in what order it was initialized, and deinitialize it in the opposite order.  
 ![alt text](https://github.com/viktorvano/STM32-Bootloader/blob/master/images/Deinit_direction.png?raw=true)  
   
 ## Applications
