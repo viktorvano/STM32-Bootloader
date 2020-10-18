@@ -44,7 +44,41 @@ MEMORY
 #define APP1_START (0x08005000)			//Origin + Bootloader size (20kB)
 #define APP2_START (0x0800A800)			//Origin + Bootloader size (20kB) + App1 Bank (22kB)
 #define FLASH_BANK_SIZE (0X5800)		//22kB
-#define FLASH_PAGE_SIZE_USER (0x400)	//1kB  
+#define FLASH_PAGE_SIZE_USER (0x400)	//1kB
+
+typedef struct
+{
+    uint32_t		stack_addr;     // Stack Pointer
+    application_t*	func_p;        // Program Counter
+} JumpStruct;
+
+void jumpToApp(const uint32_t address)
+{
+	const JumpStruct* vector_p = (JumpStruct*)address;
+
+	deinitEverything();
+
+	/* let's do The Jump! */
+    /* Jump, used asm to avoid stack optimization */
+    asm("msr msp, %0; bx %1;" : : "r"(vector_p->stack_addr), "r"(vector_p->func_p));
+}
+
+void deinitEverything()
+{
+	//-- reset peripherals to guarantee flawless start of user application
+	HAL_GPIO_DeInit(LED_GPIO_Port, LED_Pin);
+	HAL_GPIO_DeInit(USB_ENABLE_GPIO_Port, USB_ENABLE_Pin);
+	USBD_DeInit(&hUsbDeviceFS);
+	  __HAL_RCC_GPIOC_CLK_DISABLE();
+	  __HAL_RCC_GPIOD_CLK_DISABLE();
+	  __HAL_RCC_GPIOB_CLK_DISABLE();
+	  __HAL_RCC_GPIOA_CLK_DISABLE();
+	HAL_RCC_DeInit();
+	HAL_DeInit();
+	SysTick->CTRL = 0;
+	SysTick->LOAD = 0;
+	SysTick->VAL = 0;
+}
 ```
   
 ## Applications
