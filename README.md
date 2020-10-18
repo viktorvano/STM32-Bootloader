@@ -17,8 +17,8 @@ This bootloader example can jump to 2 different applications.
   
 The FLASH memory (64KB) is splitted into multiple partitions.  
 The first partition (20KB) is for the bootloader.  
-The second partition is for the Application1 (22KB).
-The third partion is for the Application2 (22KB). 
+The second partition is for the Application1 (22KB).  
+The third partion is for the Application2 (22KB).  
 ![alt text](https://github.com/viktorvano/STM32-Bootloader/blob/master/images/FLASH.png?raw=true)  
   
 To calculate offest in KB in binary, visit: https://www.gbmb.org/kb-to-bytes  
