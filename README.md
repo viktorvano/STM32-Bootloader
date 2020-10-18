@@ -24,19 +24,23 @@ The third partion is for the Application2 (22KB).
 ###### Linker - FLASH.ld
 Keep the flash origin, but change the size of the flash memory according to the bootloader size.  
 This bootloader has size under 20KB. Applocations can start right from the next sector.  
+```C
 /* Memories definition */
 MEMORY
 {
   RAM    (xrw)    : ORIGIN = 0x20000000,   LENGTH = 20K
   FLASH    (rx)    : ORIGIN = 0x8000000,   LENGTH = 20K /*64K*/
 }
+```
   
 ###### C Code - Bootloader
   
+```C
 #define APP1_START (0x08005000)			//Origin + Bootloader size (20kB)
 #define APP2_START (0x0800A800)			//Origin + Bootloader size (20kB) + App1 Bank (22kB)
 #define FLASH_BANK_SIZE (0X5800)		//22kB
 #define FLASH_PAGE_SIZE_USER (0x400)	//1kB  
+```
   
 ## Applications
 ###### Linker - FLASH.ld
