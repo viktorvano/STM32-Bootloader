@@ -15,7 +15,7 @@
   
 This bootloader example can jump to 2 different applications.  
   
-The FLASH memory (64KB) is splitted to multiple partitions.  
+The FLASH memory (64KB) is splitted into multiple partitions.  
 The first partition (20KB) is for the bootloader.  
 The second partition is for the Application1 (22KB).
 The third partion is for the Application2 (22KB).  
@@ -106,4 +106,86 @@ MEMORY
 ```  
   
 ###### C Code - Applications
+  
+App1 (Application 1) - Code Summary  
+```C
+  	  /*
+  	   * App1
+  	   * change the flash size and flash origin in FLASH.ld file like:
+  	   * FLASH    (rx)    : ORIGIN = 0x8005000,   LENGTH = 22K //64K
+  	   *
+  	   * in system_stm32f1xx.c change VECT_TAB_OFFSET to your new value like 0x00005000U
+  	   * #define USER_VECT_TAB_ADDRESS //First uncomment this in system_stm32f1xx.c
+  	   * #define VECT_TAB_OFFSET         0x00005000U
+  	   */
+```  
+
+App1 (Application 1) - system_stm32f1xx.c  
+```C
+/* Note: Following vector table addresses must be defined in line with linker
+         configuration. */
+/*!< Uncomment the following line if you need to relocate the vector table
+     anywhere in Flash or Sram, else the vector table is kept at the automatic
+     remap of boot address selected */
+ #define USER_VECT_TAB_ADDRESS //Uncommented this
+
+#if defined(USER_VECT_TAB_ADDRESS)
+/*!< Uncomment the following line if you need to relocate your vector Table
+     in Sram else user remap will be done in Flash. */
+/* #define VECT_TAB_SRAM */
+#if defined(VECT_TAB_SRAM)
+#define VECT_TAB_BASE_ADDRESS   SRAM_BASE       /*!< Vector Table base address field.
+                                                     This value must be a multiple of 0x200. */
+#define VECT_TAB_OFFSET         0x00000000U     /*!< Vector Table base offset field.
+                                                     This value must be a multiple of 0x200. */
+#else
+#define VECT_TAB_BASE_ADDRESS   FLASH_BASE      /*!< Vector Table base address field.
+                                                     This value must be a multiple of 0x200. */
+#define VECT_TAB_OFFSET         0x00005000U     /*!< Vector Table base offset field.
+                                                     This value must be a multiple of 0x200. */
+#endif /* VECT_TAB_SRAM */
+#endif /* USER_VECT_TAB_ADDRESS */
+```  
+  
+  
+App2 (Application 2) - Code Summary  
+```C
+	  /*
+	   * App2
+	   * change the flash size and flash origin in FLASH.ld file like:
+	   * FLASH    (rx)    : ORIGIN = 0x800A800,   LENGTH = 22K //64K
+	   *
+	   * in system_stm32f1xx.c change VECT_TAB_OFFSET to your new value like 0x0000A800U
+	   * #define USER_VECT_TAB_ADDRESS //First uncomment this in system_stm32f1xx.c
+	   * #define VECT_TAB_OFFSET         0x0000A800U
+	   */
+```  
+
+App2 (Application 2) - system_stm32f1xx.c  
+```C
+/* Note: Following vector table addresses must be defined in line with linker
+         configuration. */
+/*!< Uncomment the following line if you need to relocate the vector table
+     anywhere in Flash or Sram, else the vector table is kept at the automatic
+     remap of boot address selected */
+ #define USER_VECT_TAB_ADDRESS //Uncommented this
+
+#if defined(USER_VECT_TAB_ADDRESS)
+/*!< Uncomment the following line if you need to relocate your vector Table
+     in Sram else user remap will be done in Flash. */
+/* #define VECT_TAB_SRAM */
+#if defined(VECT_TAB_SRAM)
+#define VECT_TAB_BASE_ADDRESS   SRAM_BASE       /*!< Vector Table base address field.
+                                                     This value must be a multiple of 0x200. */
+#define VECT_TAB_OFFSET         0x00000000U     /*!< Vector Table base offset field.
+                                                     This value must be a multiple of 0x200. */
+#else
+#define VECT_TAB_BASE_ADDRESS   FLASH_BASE      /*!< Vector Table base address field.
+                                                     This value must be a multiple of 0x200. */
+#define VECT_TAB_OFFSET         0x0000A800U     /*!< Vector Table base offset field.
+                                                     This value must be a multiple of 0x200. */
+#endif /* VECT_TAB_SRAM */
+#endif /* USER_VECT_TAB_ADDRESS */
+```  
+  
   
