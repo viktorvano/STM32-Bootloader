@@ -20,6 +20,13 @@ The first partition (20KB) is for the bootloader.
 The second partition is for the Application1 (22KB).
 The third partion is for the Application2 (22KB).  
   
+To calculate offest in KB in binary, visit: https://www.gbmb.org/kb-to-bytes  
+Example:  
+20KB is 20480 Bytes.  
+  
+To find out what is your's MCU Page Size, visit: https://www.st.com/resource/en/reference_manual/cd00171190-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf    
+  
+  
 ## Bootloader
   
 A bootloader is just an app that can jump to another application, erase the flash, or write a new data to the FLASH memory.  
