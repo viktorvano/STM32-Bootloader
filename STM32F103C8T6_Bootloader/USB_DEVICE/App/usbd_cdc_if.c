@@ -277,7 +277,6 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 		messageHandler(Buf);
 	}
 	HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);//LED OFF
-  //CDC_Transmit_FS(&Buf[0], length);
   //my code end
   return (USBD_OK);
   /* USER CODE END 6 */

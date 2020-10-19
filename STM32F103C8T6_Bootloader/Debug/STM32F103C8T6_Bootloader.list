@@ -10020,7 +10020,6 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
  8004674:	f44f 5080 	mov.w	r0, #4096	; 0x1000
  8004678:	f2c4 0001 	movt	r0, #16385	; 0x4001
  800467c:	f7fc fdfc 	bl	8001278 <HAL_GPIO_WritePin>
-  //CDC_Transmit_FS(&Buf[0], length);
   //my code end
   return (USBD_OK);
   /* USER CODE END 6 */
