@@ -111,6 +111,35 @@ void deinitEverything()
 In order to safely deinitialize a MCU it is good to check in what order it was initialized, and deinitialize it in the opposite order.  
 ![alt text](https://github.com/viktorvano/STM32-Bootloader/blob/master/images/Deinit_direction.png?raw=true)  
   
+Bootloader (USB COM Port Communication Interface) - usbd_cdc_if.c  
+```C
+static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
+{
+  /* USER CODE BEGIN 6 */
+  USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
+  USBD_CDC_ReceivePacket(&hUsbDeviceFS);
+  //my code begin
+	HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);//LED ON
+	uint16_t length = (uint16_t) *Len;
+	if(length == 4 && flashStatus == Unlocked)
+	{
+		uint32_t dataToFlash = (Buf[3]<<24) +
+							  (Buf[2]<<16) +
+							  (Buf[1]<<8) +
+							  Buf[0];//32bit Word contains 4 Bytes
+		flashWord(dataToFlash);
+	}else
+	{
+		messageHandler(Buf);
+	}
+	HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);//LED OFF
+  //CDC_Transmit_FS(&Buf[0], length);
+  //my code end
+  return (USBD_OK);
+  /* USER CODE END 6 */
+}
+```
+  
 ## Applications
 ###### Linker - FLASH.ld  
 App1 (Application 1) - FLASH.ld  
