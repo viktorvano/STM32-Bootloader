@@ -155,7 +155,7 @@ void unlockFlashAndEraseMemory()
 	while(HAL_FLASH_OB_Unlock()!=HAL_OK)
 		while(HAL_FLASH_OB_Lock()!=HAL_OK);//Weird fix attempt
 
-	if(flashStatus == Unerased)
+	if(flashStatus != Erased)
 	{
 		/* Fill EraseInit structure*/
 		FLASH_EraseInitTypeDef EraseInitStruct;
