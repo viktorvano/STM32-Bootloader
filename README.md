@@ -56,7 +56,7 @@ Extra commands are "#$ERASE_MEM" that erases the FLASH memory and "#$FLASH_ABORT
   
 ###### Linker - FLASH.ld
 Keep the flash origin, but change the size of the flash memory according to the bootloader size.  
-This bootloader has size under 20KB. Applocations can start right from the next sector.  
+This bootloader has size under 20KB. Applications can start right from the next sector.  
 ```C
 /* Memories definition */
 MEMORY
