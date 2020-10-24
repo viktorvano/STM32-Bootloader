@@ -38,6 +38,11 @@ public class AppFunctions {
                     binaryContent = new byte[(int) fileSize];
                     InputStream inputStream = new FileInputStream(file);
                     inputStream.read(binaryContent);
+                    if(fileSize > 22528)
+                        customPrompt("File Error",
+                                "File is too big: " + fileSize + " Bytes\nThat is " +
+                                        (Math.round((fileSize/22528.0)*10000.0)/100.0)
+                                        + " % of 22 528 Byte Memory", Alert.AlertType.ERROR);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
