@@ -284,7 +284,7 @@ For more details just explore the project example.
   
 This Java application uses a JRE to run.  
 It can run on any OS (Windows, Linux or Mac).  
-Executable JAR file can be downloader here:  
+Executable JAR file can be downloaded here:  
 https://github.com/viktorvano/STM32-Bootloader/blob/master/STM32Flasher/out/artifacts/STM32Flasher_jar/STM32Flasher.jar?raw=true  
   
 If you have flashed the bootloader into the STM32, you can use this STM32 Flasher to flash those app examples, or your own apps.
