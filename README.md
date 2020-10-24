@@ -29,7 +29,7 @@ Then convert that value (20480) to hexadecimal format (0x5000) in a calculator.
 To find out what is your's MCU Page Size, read a Reference Manual: https://www.st.com/resource/en/reference_manual/cd00171190-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf    
   
   
-## Bootloader
+## Bootloader for STM32
   
 A bootloader is just an app that can jump to another application, erase the flash, or write a new data to the FLASH memory.  
 Applications are located in different sections of the FLASH memory, after the last bootloader sector ends.  
@@ -139,7 +139,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 }
 ```
   
-## Applications
+## Applications for STM32
 ###### Linker - FLASH.ld  
 App1 (Application 1) - FLASH.ld  
 ```C
@@ -245,3 +245,6 @@ App2 (Application 2) - system_stm32f1xx.c
 ```  
   
   
+## STM32Flasher Application for computers  
+  
+![alt text](https://github.com/viktorvano/STM32-Bootloader/blob/master/images/STM32Flasher.png?raw=true)   
