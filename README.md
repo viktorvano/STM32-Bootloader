@@ -1,5 +1,6 @@
 # STM32-Bootloader
- STM32 bootloader example that can jump to 2 apps.
+ STM32 bootloader example that can jump to 2 apps.  
+ This example contains a bootloader example, 2 app examples and a desktop app to flash binary files to a STM32.  
   
 ## Hardware
 ![alt text](https://github.com/viktorvano/STM32-Bootloader/blob/master/images/STM32F103C8T6_Top.jpg?raw=true)  
@@ -283,8 +284,8 @@ For more details just explore the project example.
   
 This Java application uses a JRE to run.  
 It can run on any OS (Windows, Linux or Mac).  
-Executable JAR file can be cound here:  
-https://github.com/viktorvano/STM32-Bootloader/blob/master/STM32Flasher/out/artifacts/STM32Flasher_jar/STM32Flasher.jar  
+Executable JAR file can be downloader here:  
+https://github.com/viktorvano/STM32-Bootloader/blob/master/STM32Flasher/out/artifacts/STM32Flasher_jar/STM32Flasher.jar?raw=true  
   
 If you have flashed the bootloader into the STM32, you can use this STM32 Flasher to flash those app examples, or your own apps.
   
