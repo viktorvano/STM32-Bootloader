@@ -67,6 +67,7 @@ MEMORY
   
 ###### C Code - Bootloader
   
+Here are just a few important fractions of the code:  
 ```C
 #define APP1_START (0x08005000)			//Origin + Bootloader size (20kB)
 #define APP2_START (0x0800A800)			//Origin + Bootloader size (20kB) + App1 Bank (22kB)
@@ -136,6 +137,38 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
   //my code end
   return (USBD_OK);
   /* USER CODE END 6 */
+}
+```  
+  
+There is a simple message handler in "bootloader.c" that handles received commands:  
+```C
+void messageHandler(uint8_t* Buf)
+{
+	if(string_compare((char*)Buf, ERASE_FLASH_MEMORY, strlen(ERASE_FLASH_MEMORY))
+			&& flashStatus != Unlocked)
+	{
+		eraseMemory();
+		CDC_Transmit_FS((uint8_t*)&"Flash: Erased!\n", strlen("Flash: Erased!\n"));
+	}else if(string_compare((char*)Buf, FLASHING_START, strlen(FLASHING_START)))
+	{
+		unlockFlashAndEraseMemory();
+		CDC_Transmit_FS((uint8_t*)&"Flash: Unlocked!\n", strlen("Flash: Unlocked!\n"));
+	}else if(string_compare((char*)Buf, FLASHING_FINISH, strlen(FLASHING_FINISH))
+			  && flashStatus == Unlocked)
+	{
+		lockFlash();
+		CDC_Transmit_FS((uint8_t*)&"Flash: Success!\n", strlen("Flash: Success!\n"));
+	}else if(string_compare((char*)Buf, FLASHING_ABORT, strlen(FLASHING_ABORT))
+			  && flashStatus == Unlocked)
+	{
+		lockFlash();
+		eraseMemory();
+		CDC_Transmit_FS((uint8_t*)&"Flash: Aborted!\n", strlen("Flash: Aborted!\n"));
+	}else
+	{
+		CDC_Transmit_FS((uint8_t*)&"Error: Incorrect step or unknown command!\n",
+			  strlen("Error: Incorrect step or unknown command!\n"));
+	}
 }
 ```
   
@@ -244,7 +277,25 @@ App2 (Application 2) - system_stm32f1xx.c
 #endif /* USER_VECT_TAB_ADDRESS */
 ```  
   
+For more details just explore the project example.  
   
-## STM32Flasher Application for computers  
+## STM32 Flasher Application for computers  
+  
+This Java application uses a JRE to run.  
+It can run on any OS (Windows, Linux or Mac).  
+Executable JAR file can be cound here:  
+https://github.com/viktorvano/STM32-Bootloader/blob/master/STM32Flasher/out/artifacts/STM32Flasher_jar/STM32Flasher.jar  
+  
+If you have flashed the bootloader into the STM32, you can use this STM32 Flasher to flash those app examples, or your own apps.
+  
+###### How to use STM32 Flasher:  
+1.) Set the BOOT1 pin to logical 1 state on the STM32.  
+2.) Use the switch (B11 pin) on the STM32 board to select the app you want to flash or erase.  
+3.) Connect the STM32 board to a computer.  
+4.) Launch the "STM32Flasher.jar".  
+5.) Select the "Bootloader ComPort" and connect. Now you have the option to erase your current selected app from the STM32.  
+6.) Click the "File" button to choose your binary file. Your binary app has to match with step 2, otherwise any iterrupt will not work and the app will be stuck.  
+7.) Click the "Flash" button. It should be flashed within a few seconds.  
+8.) Click "Disconnect" and close STM32 Flasher app.  
   
 ![alt text](https://github.com/viktorvano/STM32-Bootloader/blob/master/images/STM32Flasher.png?raw=true)   
