@@ -298,5 +298,6 @@ If you have flashed the bootloader into the STM32, you can use this STM32 Flashe
 6.) Click the "File" button to choose your binary file. Your binary app has to match with step 2 (for example App1.bin for the App1 partition), otherwise any iterrupt will not work and the STM32 app will be stuck when it tries to run (the vector table will not match).  
 7.) Click the "Flash" button. It should be flashed within a few seconds.  
 8.) Click "Disconnect" and close STM32 Flasher app.  
+9.) Set the BOOT1 pin to logical 0 state on the STM32 and reset the STM32 board. Now your app will run.  
   
 ![alt text](https://github.com/viktorvano/STM32-Bootloader/blob/master/images/STM32Flasher.png?raw=true)   
