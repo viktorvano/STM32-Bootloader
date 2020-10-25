@@ -1,6 +1,8 @@
 # STM32-Bootloader
  STM32 bootloader example that can jump to 2 apps.  
  This example contains a bootloader example, 2 app examples and a desktop app to flash binary files to a STM32.  
+   
+ Tutorial Video: https://youtu.be/S0s69xNE1dE  
   
 ## Hardware
 ![alt text](https://github.com/viktorvano/STM32-Bootloader/blob/master/images/STM32F103C8T6_Top.jpg?raw=true)  
