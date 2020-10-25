@@ -14,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import static com.viktor.vano.stm32flasher.AppFunctions.messageHandler;
-import static com.viktor.vano.stm32flasher.AppFunctions.setButtonsEnable;
 import static com.viktor.vano.stm32flasher.GUI.Main.*;
 import static com.viktor.vano.stm32flasher.ObjectsAndVariables.*;
 

@@ -38,6 +38,7 @@ public class AppFunctions {
                     binaryContent = new byte[(int) fileSize];
                     InputStream inputStream = new FileInputStream(file);
                     inputStream.read(binaryContent);
+                    readChars = 0;
                     if(fileSize > 22528)
                         customPrompt("File Error",
                                 "File is too big: " + fileSize + " Bytes\nThat is " +

@@ -10,7 +10,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.Reader;
 
 public class ObjectsAndVariables {
     public static final int stageHeight = 600;
