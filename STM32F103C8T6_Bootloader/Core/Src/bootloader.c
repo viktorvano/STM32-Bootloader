@@ -85,7 +85,7 @@ void flashWord(uint32_t dataToFlash)
 			  address = APP2_START + Flashed_offset;
 		  status = HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, address, dataToFlash);
 		  flash_attempt++;
-	  }while(status != HAL_OK && flash_attempt < 10 && dataToFlash == readWord(address));
+	  }while(status != HAL_OK && flash_attempt < 10 && dataToFlash != readWord(address));
 	  if(status != HAL_OK)
 	  {
 		  CDC_Transmit_FS((uint8_t*)&"Flashing Error!\n", strlen("Flashing Error!\n"));
